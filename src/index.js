@@ -2,9 +2,11 @@
 
 const { createSocket } = require("./socket/createSocket.js");
 const { ownerNumber } = require("../config/index.js");
+const logger = require("../utils/logger.js");
 
 async function startBot () {
-  await createSocket();
+  logger.info("Starting Nano-MD bot...");
+  await createSocket("qr", ownerNumber);
 };
 
 startBot();

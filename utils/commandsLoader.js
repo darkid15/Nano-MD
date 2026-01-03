@@ -5,10 +5,19 @@ const fs = require("fs");
 const path = require("path");
 
 function loadCommands () {
-    for (const cmd of fs.readdirSync(commandsDir)) {
-        if (!cmd.endsWith(".js")) continue;
+    const files = fs.readdirSync(commandsDir).filter(f => f.endsWith(".js"));
+    
+    const commands = new Map();
+    
+    for (const file of files) {
+        const fullPath = path.join(commandsDir, file);
+        const cmd = require(fullPath);
         
-        const fullPath = path.join(commandsDir, cmd);
-        const command = require(fullPath);
+        if (!cmd.name || !cmd.run) continue;
+        
+        commands.set(cmd.name.toLowerCase(), cmd);
     }
+    return commands;
 }
+
+module.exports = { loadCommands };

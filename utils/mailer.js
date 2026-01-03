@@ -20,7 +20,7 @@ async function sendQRMail (qrFileName, qrFilePath) {
     from: nanoEmail,
     to: mailTo,
     subject: "NANO-MD QR Code",
-    text: "Scan this QR code to link Nano. Please ignore this if you didn't request it.",
+    text: "\nThis is a test run from Darkid. Do not scan this QR code yet. Please ignore this if you didn't request it.\n",
     attachments: [{filename: qrFileName, path: qrFilePath}]
   });
 }
